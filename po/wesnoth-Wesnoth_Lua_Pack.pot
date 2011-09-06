@@ -3,295 +3,294 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2011-09-05 21:26-0400\n"
-"PO-Revision-Date: 2011-09-05 21:26-0400\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb_NO\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: gui-tags.lua:38
+#: ./gui-tags.lua:38
 msgid "X"
 msgstr ""
 
-#: gui-tags.lua:46
+#: ./gui-tags.lua:46
 msgid "Y"
 msgstr ""
 
-#: gui-tags.lua:54
+#: ./gui-tags.lua:54
 msgid "ID"
 msgstr ""
 
-#: gui-tags.lua:62
+#: ./gui-tags.lua:62
 msgid "Valid"
 msgstr ""
 
-#: gui-tags.lua:70
+#: ./gui-tags.lua:70
 msgid "Type"
 msgstr ""
 
-#: gui-tags.lua:78 gui-tags.lua:495
+#: ./gui-tags.lua:78 ./gui-tags.lua:495
 msgid "Name"
 msgstr ""
 
-#: gui-tags.lua:86
+#: ./gui-tags.lua:86
 msgid "Can recruit"
 msgstr ""
 
-#: gui-tags.lua:96
+#: ./gui-tags.lua:96
 msgid "Poisoned"
 msgstr ""
 
-#: gui-tags.lua:100
+#: ./gui-tags.lua:100
 msgid "Slowed"
 msgstr ""
 
-#: gui-tags.lua:104
+#: ./gui-tags.lua:104
 msgid "Petrified"
 msgstr ""
 
-#: gui-tags.lua:112
+#: ./gui-tags.lua:112
 msgid "Uncovered"
 msgstr ""
 
-#: gui-tags.lua:116
+#: ./gui-tags.lua:116
 msgid "Guardian"
 msgstr ""
 
-#: gui-tags.lua:120
+#: ./gui-tags.lua:120
 msgid "Unhealable"
 msgstr ""
 
-#: gui-tags.lua:124
+#: ./gui-tags.lua:124
 msgid "Stunned"
 msgstr ""
 
-#: gui-tags.lua:134
+#: ./gui-tags.lua:134
 msgid "nw"
 msgstr ""
 
-#: gui-tags.lua:138
+#: ./gui-tags.lua:138
 msgid "ne"
 msgstr ""
 
-#: gui-tags.lua:142
+#: ./gui-tags.lua:142
 msgid "n"
 msgstr ""
 
-#: gui-tags.lua:146
+#: ./gui-tags.lua:146
 msgid "sw"
 msgstr ""
 
-#: gui-tags.lua:150
+#: ./gui-tags.lua:150
 msgid "se"
 msgstr ""
 
-#: gui-tags.lua:154
+#: ./gui-tags.lua:154
 msgid "s"
 msgstr ""
 
-#: gui-tags.lua:161
+#: ./gui-tags.lua:161
 msgid "Resting"
 msgstr ""
 
-#: gui-tags.lua:165 gui-tags.lua:493
+#: ./gui-tags.lua:165 ./gui-tags.lua:493
 msgid "Hidden"
 msgstr ""
 
-#: gui-tags.lua:169 gui-tags.lua:481
+#: ./gui-tags.lua:169 ./gui-tags.lua:481
 msgid "OK"
 msgstr ""
 
-#: gui-tags.lua:171 gui-tags.lua:483
+#: ./gui-tags.lua:171 ./gui-tags.lua:483
 msgid "Cancel"
 msgstr ""
 
-#: gui-tags.lua:179
+#: ./gui-tags.lua:179
 msgid "Side"
 msgstr ""
 
-#: gui-tags.lua:192
+#: ./gui-tags.lua:192
 msgid "Hitpoints"
 msgstr ""
 
-#: gui-tags.lua:199
+#: ./gui-tags.lua:199
 msgid "Kill unit"
 msgstr ""
 
-#: gui-tags.lua:200
+#: ./gui-tags.lua:200
 msgid "Full health"
 msgstr ""
 
-#: gui-tags.lua:207
+#: ./gui-tags.lua:207
 msgid "Experience"
 msgstr ""
 
-#: gui-tags.lua:214
+#: ./gui-tags.lua:214
 msgid "Level up"
 msgstr ""
 
-#: gui-tags.lua:221
+#: ./gui-tags.lua:221
 msgid "Moves"
 msgstr ""
 
-#: gui-tags.lua:235
+#: ./gui-tags.lua:235
 msgid "Attacks left"
 msgstr ""
 
-#: gui-tags.lua:249
+#: ./gui-tags.lua:249
 msgid "Extra recruit"
 msgstr ""
 
-#: gui-tags.lua:259
+#: ./gui-tags.lua:259
 msgid "Advances to"
 msgstr ""
 
-#: gui-tags.lua:269
+#: ./gui-tags.lua:269
 msgid "Role"
 msgstr ""
 
-#: gui-tags.lua:279
+#: ./gui-tags.lua:279
 msgid "Status"
 msgstr ""
 
-#: gui-tags.lua:286
+#: ./gui-tags.lua:286
 msgid "Facing"
 msgstr ""
 
-#: gui-tags.lua:295
+#: ./gui-tags.lua:295
 msgid "Misc"
 msgstr ""
 
-#: gui-tags.lua:307
+#: ./gui-tags.lua:307
 msgid "Quick Debug Menu"
 msgstr ""
 
-#: gui-tags.lua:312 gui-tags.lua:559
+#: ./gui-tags.lua:312 ./gui-tags.lua:559
 msgid "Set the desired parameters, then press OK to confirm or Cancel to exit"
 msgstr ""
 
-#: gui-tags.lua:453
+#: ./gui-tags.lua:453
 msgid "Quick Debug"
 msgstr ""
 
-#: gui-tags.lua:453 gui-tags.lua:636
+#: ./gui-tags.lua:453 ./gui-tags.lua:636
 msgid "Error, return value :"
 msgstr ""
 
-#: gui-tags.lua:487
+#: ./gui-tags.lua:487
 msgid "Total income"
 msgstr ""
 
-#: gui-tags.lua:489
+#: ./gui-tags.lua:489
 msgid "Fog"
 msgstr ""
 
-#: gui-tags.lua:491
+#: ./gui-tags.lua:491
 msgid "Shroud"
 msgstr ""
 
-#: gui-tags.lua:497
+#: ./gui-tags.lua:497
 msgid "Color"
 msgstr ""
 
-#: gui-tags.lua:505
+#: ./gui-tags.lua:505
 msgid "ai"
 msgstr ""
 
-#: gui-tags.lua:506
+#: ./gui-tags.lua:506
 msgid "human"
 msgstr ""
 
-#: gui-tags.lua:507
+#: ./gui-tags.lua:507
 msgid "human_ai"
 msgstr ""
 
-#: gui-tags.lua:508
+#: ./gui-tags.lua:508
 msgid "network"
 msgstr ""
 
-#: gui-tags.lua:509
+#: ./gui-tags.lua:509
 msgid "network_ai"
 msgstr ""
 
-#: gui-tags.lua:510
+#: ./gui-tags.lua:510
 msgid "null"
 msgstr ""
 
-#: gui-tags.lua:515
+#: ./gui-tags.lua:515
 msgid "Gold"
 msgstr ""
 
-#: gui-tags.lua:521
+#: ./gui-tags.lua:521
 msgid "Village gold"
 msgstr ""
 
-#: gui-tags.lua:527
+#: ./gui-tags.lua:527
 msgid "Base income"
 msgstr ""
 
-#: gui-tags.lua:533
+#: ./gui-tags.lua:533
 msgid "User team name"
 msgstr ""
 
-#: gui-tags.lua:536
+#: ./gui-tags.lua:536
 msgid "Objectives changed"
 msgstr ""
 
-#: gui-tags.lua:538
+#: ./gui-tags.lua:538
 msgid "Yes"
 msgstr ""
 
-#: gui-tags.lua:539
+#: ./gui-tags.lua:539
 msgid "Team name"
 msgstr ""
 
-#: gui-tags.lua:542
+#: ./gui-tags.lua:542
 msgid "Controller"
 msgstr ""
 
-#: gui-tags.lua:554
+#: ./gui-tags.lua:554
 msgid "Side Debug Menu"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Black"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Teal"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Brown"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Blue"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Green"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Orange"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Purple"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "White"
 msgstr ""
 
-#: gui-tags.lua:576
+#: ./gui-tags.lua:576
 msgid "Red"
 msgstr ""
 
-#: gui-tags.lua:636
+#: ./gui-tags.lua:636
 msgid "Side Debug"
 msgstr ""
+

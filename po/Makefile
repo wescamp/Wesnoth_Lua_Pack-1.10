@@ -14,7 +14,7 @@
 # - proper behaviour when msgfmt is missing
 # - support for relative localedir
 
-PACKAGE = wesnoth-null
+PACKAGE = wesnoth-Wesnoth_Lua_Pack
 VERSION = @VERSION@
 
 SHELL = /bin/sh
