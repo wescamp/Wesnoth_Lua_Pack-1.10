@@ -338,7 +338,7 @@ function wml_actions.show_quick_debug ( cfg )
 			wesnoth.set_dialog_value ( lua_dialog_unit.type, "unit_type" )
 			wesnoth.set_dialog_value ( lua_dialog_unit.name, "unit_name" )
 			wesnoth.set_dialog_value ( lua_dialog_unit.canrecruit, "unit_canrecruit" )
-			wesnoth.set_dialog_value ( string.format("%s~TC(%d,magenta)", lua_dialog_unit.__cfg.image, lua_dialog_unit.side), "unit_image" )
+			wesnoth.set_dialog_value ( string.format("%s~TC(%d,magenta)", lua_dialog_unit.__cfg.image or "", lua_dialog_unit.side), "unit_image" )
 			-- set sliders
 			wesnoth.set_dialog_value ( lua_dialog_unit.side, "unit_side_slider" )
 			wesnoth.set_dialog_value ( lua_dialog_unit.hitpoints, "unit_hitpoints_slider" )
@@ -372,45 +372,47 @@ function wml_actions.show_quick_debug ( cfg )
 			wesnoth.set_dialog_value ( lua_dialog_unit.hidden, "hidden_checkbutton" )
 		end
 
-		local function postshow()
-			-- here get all the widget values in variables; store them in temp variables
-			-- sliders
-			temp_table.side = wesnoth.get_dialog_value ( "unit_side_slider" )
-			temp_table.hitpoints = wesnoth.get_dialog_value ( "unit_hitpoints_slider" )
-			temp_table.experience = wesnoth.get_dialog_value ( "unit_experience_slider" )
-			temp_table.moves = wesnoth.get_dialog_value ( "unit_moves_slider" )
-			temp_table.attacks_left = wesnoth.get_dialog_value ( "unit_attacks_slider" )
-			-- text boxes
-			-- we do this empty table/gmatch/insert cycle, because get_dialog_value returns a string from a text_box, and the value required is a "table with unnamed indices holding strings"
-			local temp_advances_to = {}
-			local temp_extra_recruit = {}
-			for value in string.gmatch( ( wesnoth.get_dialog_value ( "textbox_extra_recruit" ) ), "[^%s,][^,]*" ) do
-				table.insert( temp_extra_recruit, value )
+		local function sync()
+			local temp_table = { } -- to store values before checking if user allowed modifying
+
+			local function postshow()
+				-- here get all the widget values in variables; store them in temp variables
+				-- sliders
+				temp_table.side = wesnoth.get_dialog_value ( "unit_side_slider" )
+				temp_table.hitpoints = wesnoth.get_dialog_value ( "unit_hitpoints_slider" )
+				temp_table.experience = wesnoth.get_dialog_value ( "unit_experience_slider" )
+				temp_table.moves = wesnoth.get_dialog_value ( "unit_moves_slider" )
+				temp_table.attacks_left = wesnoth.get_dialog_value ( "unit_attacks_slider" )
+				-- text boxes
+				temp_table.advances_to = wesnoth.get_dialog_value "textbox_advances_to"
+				temp_table.extra_recruit = wesnoth.get_dialog_value "textbox_extra_recruit"
+				temp_table.role = wesnoth.get_dialog_value "textbox_role"
+				-- checkbuttons
+				temp_table.poisoned = wesnoth.get_dialog_value "poisoned_checkbutton"
+				temp_table.slowed = wesnoth.get_dialog_value "slowed_checkbutton"
+				temp_table.petrified = wesnoth.get_dialog_value "petrified_checkbutton"
+				temp_table.uncovered = wesnoth.get_dialog_value "uncovered_checkbutton"
+				temp_table.guardian = wesnoth.get_dialog_value "guardian_checkbutton"
+				temp_table.unhealable = wesnoth.get_dialog_value "unhealable_checkbutton"
+				temp_table.stunned = wesnoth.get_dialog_value "stunned_checkbutton"
+				-- put facing here
+				local facings = { "nw", "ne", "n", "sw", "se", "s" }
+				-- wesnoth.get_dialog_value ( "facing_listbox" ) returns a number, that was 2 for the second radiobutton and 5 for the fifth, hence the table above
+				temp_table.facing = facings[ wesnoth.get_dialog_value ( "facing_listbox" ) ] -- it is setted correctly, but for some reason it is not shown
+				-- misc; checkbuttons
+				temp_table.resting = wesnoth.get_dialog_value "resting_checkbutton"
+				temp_table.hidden = wesnoth.get_dialog_value "hidden_checkbutton"
 			end
-			for value in string.gmatch( ( wesnoth.get_dialog_value ( "textbox_advances_to" ) ), "[^%s,][^,]*" ) do
-				table.insert( temp_advances_to, value )
-			end
-			temp_table.advances_to = temp_advances_to
-			temp_table.extra_recruit = temp_extra_recruit
-			temp_table.role = wesnoth.get_dialog_value "textbox_role"
-			-- checkbuttons
-			temp_table.poisoned = wesnoth.get_dialog_value "poisoned_checkbutton"
-			temp_table.slowed = wesnoth.get_dialog_value "slowed_checkbutton"
-			temp_table.petrified = wesnoth.get_dialog_value "petrified_checkbutton"
-			temp_table.uncovered = wesnoth.get_dialog_value "uncovered_checkbutton"
-			temp_table.guardian = wesnoth.get_dialog_value "guardian_checkbutton"
-			temp_table.unhealable = wesnoth.get_dialog_value "unhealable_checkbutton"
-			temp_table.stunned = wesnoth.get_dialog_value "stunned_checkbutton"
-			-- put facing here
-			local facings = { "nw", "ne", "n", "sw", "se", "s" }
-			-- wesnoth.get_dialog_value ( "facing_listbox" ) returns a number, that was 2 for the second radiobutton and 5 for the fifth, hence the table above
-			temp_table.facing = facings[ wesnoth.get_dialog_value ( "facing_listbox" ) ] -- it is setted correctly, but for some reason it is not shown
-			-- misc; checkbuttons
-			temp_table.resting = wesnoth.get_dialog_value "resting_checkbutton"
-			temp_table.hidden = wesnoth.get_dialog_value "hidden_checkbutton"
+
+			local return_value = wesnoth.show_dialog( debug_dialog, preshow, postshow )
+
+			return { return_value = return_value, { "temp_table", temp_table } }
 		end
 
-		local return_value = wesnoth.show_dialog( debug_dialog, preshow, postshow )
+		local return_table = wesnoth.synchronize_choice(sync)
+		local return_value = return_table.return_value
+		local temp_table = helper.get_child( return_table, "temp_table" )
+
 		if return_value == 1 or return_value == -1 then -- if used pressed OK or Enter, modify unit
 			-- sliders
 			if wesnoth.sides[temp_table.side] then
@@ -422,8 +424,17 @@ function wml_actions.show_quick_debug ( cfg )
 			lua_dialog_unit.attacks_left = temp_table.attacks_left
 			-- text boxes
 			-- we do this empty table/gmatch/insert cycle, because get_dialog_value returns a string from a text_box, and the value required is a "table with unnamed indices holding strings"
-			lua_dialog_unit.advances_to = temp_table.advances_to
-			lua_dialog_unit.extra_recruit = temp_table.extra_recruit
+			-- moved here because synchronize_choice needs a WML object, and a table with unnamed indices isn't
+			local temp_advances_to = {}
+			local temp_extra_recruit = {}
+			for value in wlp_utils.split( temp_table.extra_recruit ) do
+				table.insert( temp_extra_recruit, wlp_utils.chop( value ) )
+			end
+			for value in wlp_utils.split( temp_table.extra_recruit ) do
+				table.insert( temp_advances_to, wlp_utils.chop( value ) )
+			end
+			lua_dialog_unit.advances_to = temp_advances_to
+			lua_dialog_unit.extra_recruit = temp_extra_recruit
 			lua_dialog_unit.role = temp_table.role
 			-- checkbuttons
 			lua_dialog_unit.status.poisoned = temp_table.poisoned
@@ -605,25 +616,33 @@ function wml_actions.show_side_debug ( cfg )
 			wesnoth.set_dialog_value ( temp_controller, "controller_listbox" )
 		end
 
-		local temp_table = { } -- to store values before checking if user allowed modifying
+		local function sync()
+			local temp_table = { } -- to store values before checking if user allowed modifying
 
-		local function postshow()
-			-- get widget values
-			-- sliders
-			temp_table.gold = wesnoth.get_dialog_value ( "side_gold_slider" )
-			temp_table.village_gold = wesnoth.get_dialog_value ( "side_village_gold_slider" )
-			temp_table.base_income = wesnoth.get_dialog_value ( "side_base_income_slider" )
-			-- text boxes
-			temp_table.user_team_name = wesnoth.get_dialog_value ( "user_team_name_textbox" )
-			temp_table.team_name = wesnoth.get_dialog_value ( "team_name_textbox" )
-			-- checkbutton
-			temp_table.objectives_changed = wesnoth.get_dialog_value ( "objectives_changed_checkbutton" )
-			-- radiobutton
-			local controllers = { "ai", "human", "human_ai", "network", "network_ai", "null" }
-			temp_table.controller = controllers[ wesnoth.get_dialog_value ( "controller_listbox" ) ]
+			local function postshow()
+				-- get widget values
+				-- sliders
+				temp_table.gold = wesnoth.get_dialog_value ( "side_gold_slider" )
+				temp_table.village_gold = wesnoth.get_dialog_value ( "side_village_gold_slider" )
+				temp_table.base_income = wesnoth.get_dialog_value ( "side_base_income_slider" )
+				-- text boxes
+				temp_table.user_team_name = wesnoth.get_dialog_value ( "user_team_name_textbox" )
+				temp_table.team_name = wesnoth.get_dialog_value ( "team_name_textbox" )
+				-- checkbutton
+				temp_table.objectives_changed = wesnoth.get_dialog_value ( "objectives_changed_checkbutton" )
+				-- radiobutton
+				local controllers = { "ai", "human", "human_ai", "network", "network_ai", "null" }
+				temp_table.controller = controllers[ wesnoth.get_dialog_value ( "controller_listbox" ) ]
+			end
+
+			local return_value = wesnoth.show_dialog( side_dialog, preshow, postshow )
+
+			return { return_value = return_value, { "temp_table", temp_table } }
 		end
+		local return_table = wesnoth.synchronize_choice(sync)
+		local return_value = return_table.return_value
+		local temp_table = helper.get_child(return_table, "temp_table")
 
-		local return_value = wesnoth.show_dialog( side_dialog, preshow, postshow )
 		if return_value == 1 or return_value == -1 then -- if used pressed OK or Enter, modify unit
 			lua_dialog_side.gold = temp_table.gold
 			lua_dialog_side.village_gold = temp_table.village_gold
@@ -635,5 +654,74 @@ function wml_actions.show_side_debug ( cfg )
 		elseif return_value == 2 or return_value == -2 then -- if user pressed Cancel or Esc, nothing happens
 		else wesnoth.message( tostring( _"Side Debug" ), tostring( _"Error, return value :" ) .. return_value ) end -- any unhandled case is handled here
 		-- if user clicks on empty hex, do nothing
+	end
+end
+
+-- [item_dialog]
+-- an alternative interface to pick items
+-- could be used in place of [message] with [option] tags
+function wml_actions.item_dialog( cfg )
+	local image_and_description = T.grid { T.row { T.column { vertical_alignment = "center",
+								  horizontal_alignment = "center",
+								  border = "all",
+								  border_size = 5,
+								  T.image { id = "image_name" } },
+						       T.column { horizontal_alignment = "left",
+								  border = "all",
+								  border_size = 5,
+								  T.scroll_label { id = "item_description" } }
+		                              } }
+
+	local buttonbox = T.grid { T.row { T.column { T.button { id = "take_button", return_value = 1 } },
+					   T.column { T.spacer { width = 10 } },
+					   T.column { T.button { id = "leave_button", return_value = 2 } }
+				  } }
+
+	local item_dialog = { T.helptip { id="tooltip_large" }, -- mandatory field
+			      T.tooltip { id="tooltip_large" }, -- mandatory field
+			      maximum_height = 320,
+			      maximum_width = 480,
+			      T.grid { -- Title, will be the object name
+				      T.row { T.column { horizontal_alignment = "left",
+							  grow_factor = 1, -- this one makes the title bigger and golden
+							  border = "all",
+							  border_size = 5,
+							  T.label { definition = "title", id = "item_name" } } },
+				      -- Image and item description
+				      T.row { T.column { image_and_description } }, -- grid teminator
+				      -- Effect description
+				      T.row { T.column { horizontal_alignment = "left",
+							  border = "all",
+							  border_size = 5,
+							  T.label { wrap = true, id = "item_effect" } } }, -- how to format?
+				      -- button box
+				      T.row { T.column { buttonbox } }
+				    }
+			    }
+
+	local function item_preshow()
+		-- here set all widget starting values
+		wesnoth.set_dialog_value ( cfg.name, "item_name" )
+		wesnoth.set_dialog_value ( cfg.image or "", "image_name" )
+		wesnoth.set_dialog_value ( cfg.description, "item_description" )
+		wesnoth.set_dialog_value ( cfg.effect, "item_effect" )
+		wesnoth.set_dialog_value ( cfg.take_string or tostring( _"Take it" ), "take_button" )
+		wesnoth.set_dialog_value ( cfg.leave_string or tostring( _"Leave it" ), "leave_button" )
+	end
+
+	local function sync()
+		local function item_postshow()
+			-- here get all widget values
+		end
+
+		local return_value = wesnoth.show_dialog( item_dialog, item_preshow, item_postshow )
+
+		return { return_value = return_value }
+	end
+
+	local return_table = wesnoth.synchronize_choice(sync)
+	if return_table.return_value == 1 or return_table.return_value == -1 then
+		wesnoth.set_variable ( cfg.variable or "item_picked", "yes" )
+	else wesnoth.set_variable ( cfg.variable or "item_picked", "no" )
 	end
 end

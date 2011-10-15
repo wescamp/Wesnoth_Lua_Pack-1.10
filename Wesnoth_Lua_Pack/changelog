@@ -1,3 +1,12 @@
+Version 1.4.0:
+   * Made it so that [unknown_message] is able to take duration=, side_for=,
+      and sound=.
+   * Added [item_dialog], [reverse_value] and [whisper], by Elvish_Hunter.
+   * Removed [find_path], as it is in core from 1.9.9+svn.
+   * [poison] cannot longer poison non living units.
+   * Added two support functions for handling strings (split and chop), and
+     used them in gui-tags.lua.
+
 Version 1.3.0:
    * Added [absolute_value], [get_numerical_minimum], [get_numerical_maximum],
       [get_percentage], [get_ratio_as_percentage] and [unknown_message], all by Espreon.

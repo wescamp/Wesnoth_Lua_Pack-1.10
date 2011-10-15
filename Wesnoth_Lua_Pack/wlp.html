@@ -1,0 +1,199 @@
+<html>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+	<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+	<head>
+		<title>Wesnoth Lua Pack</title>
+		<link rel="stylesheet" type="text/css" href="wlp.css" />
+	</head>
+
+	<body>
+		<h1>Wesnoth Lua Pack</h1>
+		<p>Original author: melinath</p>
+		<p>Current maintainers: Elvish_Hunter and Anonymissimus</p>
+		<p>Contributors: Alarantalara and Espreon</p>
+		<p>This Lua Pack, when installed and enabled in the _main.cfg of your campaign/add-on, will grant you access to several new WML tags. To use them, you don't need to know Lua.<br />
+Here there is a wiki-like description of each new WML tag.</p>
+		<hr />
+		<h3>[store_shroud]</h3>
+		<p>Stores a side's shroud data in a WML variable.<br />
+		<b>side:</b> the side which shroud will be stored.<br />
+		<b>variable:</b> the variable where shroud data will be stored.</p>
+		<h3>[set_shroud]</h3>
+		<p>Sets a side's shroud data to the one specified in this tag.<br />
+		<b>side:</b> the side which shroud will be setted.<br />
+		<b>shroud_data:</b> the shroud data that will be setted. It could also be a variable created by [store_shroud].</p>
+		<h3>[save_map]</h3>
+		<p>Stores the scenario map in a WML variable.<br />
+		<b>variable:</b> the variable where the map will be stored.</p>
+		<h3>[load_map]</h3>
+		<p>Replaces the scenario map with the one stored in a WML variable by [save_map].<br />
+		<b>variable:</b> the variable containing the map to load.</p>
+		<h3>[narrate]</h3>
+		<p>Shows a message with <i>"narrator"</i> as speaker.<br />
+		<b>message:</b> the message to show, it can be a translatable string.<br />
+		<b>image:</b> the image that will be shown at the left of the message, is <i>"wesnoth-icon.png"</i> per default. Use <i>"image name"~RIGHT()</i> to show the image on the right side of the screen.</p>
+		<h3>[flash_color]</h3>
+		<p>Flashes the screen with the specified color.<br />
+		<b>red, green, blue:</b> RGB value specifying the color required.</p>
+		<h3>[flash_screen]</h3>
+		<p>As <i>[flash_color]</i>, but accepts a color name as value.<br />
+		<b>color:</b> the color in which the screen will flash. Currently supported values are <i>white, red, green, blue, magenta, fuchsia, yellow, cyan, aqua, purple, orange, black.</i></p>
+		<h3>[nearest_hex]</h3>
+		<p>Finds the nearest hex to another given hex, that matches the SLF.<br />
+		<b>starting_x, starting_y:</b> the location that will be used as base for the calculation.<br />
+		<b>[filter_location]:</b> <u class="blue">StandardLocationFilter</u>, all the locations matching the filter will be compared to the one specified above.<br />
+		<b>variable:</b> the resulting nearest location will be stored in a WML variable with the given name, default is <i>nearest_hex.</i></p>
+		<h3>[nearest_unit]</h3>
+		<p>Finds the nearest unit to a given hex, that matches the SUF.<br />
+		<b>starting_x, starting_y:</b> the location that will be used as base for the calculation.<br />
+		<b>[filter]:</b> <u class="blue">StandardUnitFilter</u>, all the units matching the filter will be compared to the hex specified above.<br />
+		<b>variable:</b> the resulting nearest unit will be stored in a WML variable with the given name, default is <i>nearest_unit.</i></p>
+		<h3>[get_unit_defense]</h3>
+		<p>Stores the defensive percentage of a unit on its current hex in a WML variable.<br />
+		<u class="blue">StandardUnitFilter</u>, all the units matching the filter will be checked. <u>Do not use a [filter] sub-tag.</u><br />
+		<b>variable:</b> the variable where the results will be stored, default name is <i>defense.</i> Every element of the array will contain the following keys: <i>id</i> (the unit's id), <i>x</i> and <i>y</i> (the unit's location), <i>terrain</i> (the terrain where the unit is), <i>defense</i> (the current unit's defense).</p>
+		<h3>[slow]</h3>
+		<p>Slows all the units matching the filter, floating also the <i>"slowed"</i> label.<br />
+		<u class="blue">StandardUnitFilter</u>, <u>do not use a [filter] sub-tag.</u></p>
+		<h3>[poison]</h3>
+		<p>Poisons all the units (except non living units, like Undead) matching the filter, floating also the <i>"poisoned"</i> label.<br />
+		<u class="blue">StandardUnitFilter</u>, <u>do not use a [filter] sub-tag.</u></p>
+		<h3>[unslow]</h3>
+		<p>Unslows all the units matching the filter.<br />
+		<u class="blue">StandardUnitFilter</u>, <u>do not use a [filter] sub-tag.</u></p>
+		<h3>[unpoison]</h3>
+		<p>Unpoisons all the units matching the filter.<br />
+		<u class="blue">StandardUnitFilter</u>, <u>do not use a [filter] sub-tag.</u></p>
+		<hr />
+		<h2>Tags available from version 1.1.0</h2>
+		<h3>[fade_to_black]</h3>
+		<p>Fades the screen to black. Use <i>[fade_in]</i> to return to normal. It is a replacement for the <i>{FADE_TO_BLACK}</i> macro.</p>
+		<h3>[fade_to_black_hold]</h3>
+		<p>Fades the screen to black and then pauses. Use <i>[fade_in]</i> to return to normal. It is a replacement for the <i>{FADE_TO_BLACK_HOLD}</i> macro.<br />
+		<b>delay:</b> required, it is the pause duration, in milliseconds.</p>
+		<h3>[fade_in]</h3>
+		<p>Brings the screen back from a <i>[fade_to_black]</i> or a <i>[fade_to_black_hold].</i> It is a replacement for the <i>{FADE_IN}</i> macro.</p>
+		<h3>[fade_to_white]</h3>
+		<p>Fades the screen to white. Use <i>[fade_in_from_white]</i> to return to normal. It is equivalent to a theorical <i>{FADE_TO_WHITE}</i> macro.</p>
+		<h3>[fade_to_white_hold]</h3>
+		<p>Fades the screen to white and then pauses. Use <i>[fade_in_from_white]</i> to return to normal. It is equivalent to a theorical <i>{FADE_TO_WHITE_HOLD}</i> macro.<br />
+		<b>delay: </b> required, it is the pause duration, in milliseconds.</p>
+		<h3>[fade_in_from_white]</h3>
+		<p>Brings the screen back from a <i>[fade_to_white]</i> or a <i>[fade_to_white_hold].</i> It is equivalent to a theorical <i>{FADE_IN_FROM_WHITE}</i>  macro.</p>
+		<h3>[scatter_units]</h3>
+		<p>Randomly places the specified units on the locations matching the filter. Replacement for <i>{SCATTER_UNITS}</i> macro.<br />
+		<b>[filter_location]:</b> <u class="blue">StandardLocationFilter</u>, required. Units will be placed in locations matching the filter. Warning: if you set up an incorrect filter (like, for example, not removing those hexes that will be impassable for the units that you want to place), respect of scatter_radius (below) may not be guaranteed.<br />
+		<b>unit_types:</b> required. If you specify more than one type (comma-separated list), each placed units will be of one of the specified types, randomly chosen.<br />
+		<b>units:</b> required, it is the amount of units to place. They may not be placed all if there are no more locations matching the filter available.<br />
+		<b>scatter_radius:</b> if present, each unit will be placed at the given distance from the other units already placed by this tag.<br />
+		<b>[wml]:</b> if present, the specified WML will be embedded in each unit placed by the tag.</p>
+		<hr />
+		<h2>Tags available from version 1.2.0</h2>
+		<h3>[animate_path]</h3>
+		<p>Move an image or cycle of images along a path not restricted by the map grid.<br />
+		<b>x, y:</b> required. A list of points that control the movement. Points are specified in pixels and ranges are not accepted. For most interpolation methods, the animation will pass through the listed points. Some interpolation methods require a minimum number of points be specified.<br />
+		<b>hex_x, hex_y:</b> required. The coordinates of the hex that the x and y coordinates will be relative to. 0,0 is the centre of this hex, with positive values for x and y up and to the right.<br />
+		<b>image:</b> required. The image or sequence of images to display. If the value of <b>frames</b> exceeds the number of images, the images will be displayed in a loop. The images must have a 72 pixel transparent border surrounding them to be displayed properly.<br />
+		<b>frame_length:</b> required. The amount of time each image will be displayed on screen in milliseconds.<br />
+		<b>frames:</b> The number of frames to use in the animation. If it is not specified, then the number of <b>images</b> from image will be used to calculate the number of frames. The number of frames must be at least 2 (so including a single image in <b>image</b> and not including this attribute will not work).<br />
+		<b>linger:</b> (default: no). If yes, then the last image will remain visible after the animation completes. It may be removed using <i>[remove_item].</i><br />
+		<b>transpose:</b> (default: no). Interpolation methods marked function are normally based on the x coordinates. If this is yes, then they are based on the y coordinates. It has no effect on other interpolation methods.<br />
+		<b>interpolation:</b> (default linear). The interpolation method used to travel between points. Allowed values are: <i>linear, bspline, parabola and cubic_spline.</i><br />
+		Method Details:<br />
+    		Methods marked (function) require that the x values (y values if transpose is yes) be distinct and sorted (increasing or decreasing). Currently this is not checked, provide points out of order at your own risk.
+    		<ul>
+    			<li>linear: Animation moves in a straight line between each set of points.</li>
+    			<li>bspline: requires that at least 4 points be specified. Animation moves within a curve bounded by the points. It usually will not pass exactly through any point. It is currently the only method that produces curves that can form spirals or overlapping shapes.</li>
+    			<li>parabola (function): requires exactly 3 points be specified. The animation moves along the unique parabola that includes the specified points.</li>
+    			<li>cubic_spline (function): Animation moves along a curved path passing through each point. It is not possible to double back.</li>
+    		</ul>
+		</p>
+		<hr />
+		<h2>Tags available from version 1.3.0</h2>
+		<h3>[absolute_value]</h3>
+		<p>Converts the value of the supplied variable to its absolute value (that is, removing the minus sign if the number has it).<br />
+		<b>variable:</b> required. Its content will be converted to its absolute value.<br />
+		<b>result_variable:</b> The resulting value will be stored here. If not supplied, the resulting value will be stored in the same variable supplied as argument for the <i>variable=</i> key.</p>
+		<h3>[get_numerical_minimum]</h3>
+		<p>Given two values, stores in a variable the lowest one.<br />
+		<b>first_value, other_value:</b> required. These will be the two values to be checked.<br />
+		<b>result_variable:</b> required. The lowest value will be stored here.</p>
+		<h3>[get_numerical_maximum]</h3>
+		<p>Given two values, stores in a variable the highest one.<br />
+		<b>first_value, other_value:</b> required. These will be the two values to be checked.<br />
+		<b>result_variable:</b> required. The highest value will be stored here.</p>
+		<h3>[get_percentage]</h3>
+		<p>Given a value (example: 20) and a percentage (example: 50), stores in a variable resulting value (example: 10).<br />
+		<b>value:</b> required. The value from which the percentage will be calculated.<br />
+		<b>percentage:</b> required. <u>Do not use the % sign.</u><br />
+		<b>variable:</b> required. The variable where the result will be stored.</p>
+		<h3>[get_ratio_as_percentage]</h3>
+		<p>Converts a ratio as a percent value, and stores the result in a variable.<br />
+		<b>numerator, denominator:</b> required. The fraction to convert. <u>Do not use the / sign</u> (unless you want to use the FormulaAI notation).<br />
+		<b>variable:</b> required. The variable where the result will be stored.</p>
+		<h3>[unknown_message]</h3>
+		<p>Displays a message with the unknown unit icon as speaker portrait. Can team color the icon and set the caption.<br />
+		<b>message:</b> required. The message to display, use exactly like in the <i>[message]</i> tag.<br />
+		<b>color:</b> if specified, the unknown unit icon will be team colored. Supported values are <i>red, lightred, darkred, blue, green, purple, black, brown, orange, white, teal</i> or integer numeric values between <i>1</i> and <i>9</i> (enclosed).<br />
+		<b>right:</b> default no, if yes the unknown unit icon will be displayed on the right side of the screen.<br />
+		<b>caption:</b> the text to display as speaker's name, use like in the <i>[message]</i> tag.<br />
+		<b>duration:</b> the minimum number of frames for the message to be displayed.<br />
+		<b>side_for:</b> a comma-separated list of sides that determines which sides see the message.<br />
+		<b>sound:</b> a sound effect to play as the message is shown. This can take a comma-separated list; a sound from such a list will be randomly chosen to be played.</p>
+		<h3>[show_quick_debug]</h3>
+		<p>When used inside a <i>[set_menu_item],</i> this tag allows modifying several unit attributes using the right-click menu. It displays a dialog where you can set hitpoints, moves, etc.<br />
+		<b>This tag accepts no additional keys.</b> Usage:<br />
+<pre><code>[set_menu_item]
+	id=quick_debug
+	description=Quick Debug
+	[command]
+		[show_quick_debug]
+		[/show_quick_debug]
+	[/command]
+[/set_menu_item]</code></pre>
+		</p>
+		<h3>[get_movement_type]</h3>
+		<p>Stores the movement type of the unit matching the filter inside a variable with the given name. If more than one unit matches the filter, only the first one is chosen.<br />
+		<u class="blue">StandardUnitFilter</u>, <u>do not use a [filter] sub-tag.</u><br />
+		<b>variable:</b> the variable name where the movement type will be stored, if no value is supplied <i>'movement_type'</i> will be used as default name.</p>
+		<h3>[show_side_debug]</h3>
+		<p>When used inside a <i>[set_menu_item],</i> this tag allows modifying several side attributes using the right-click menu. It displays a dialog where you can set gold, income, etc.<br />
+		<b>This tag accepts no additional keys.</b> Usage:<br />
+<pre><code>[set_menu_item]
+	id=side_debug
+	description=Side Debug
+	[command]
+		[show_side_debug]
+		[/show_side_debug]
+	[/command]
+[/set_menu_item]</code></pre>
+		</p>
+		<hr />
+		<h2>Tags available from version 1.4.0</h2>
+		<h3>[item_dialog]</h3>
+		<p>This tag shows a dialog box that can be used in place of the usual [message] with [option] tags. Upon the user's choice, it will set a variable that can be checked to see if the item was picked or not.<br />
+		<b>name:</b> will be the dialog's title.<br />
+		<b>image:</b> the image that will be displayed in the left side of the dialog. For Holy Water, for example, you can use <i>items/holy-water.png</i>.<br />
+		<b>description:</b> a long description of the item. If it's too long, scrollbars will be automatically used.<br />
+		<b>effect:</b> very short description of the item's effects. For example: "This staff grants a melee 5-2 impact magical attack".<br />
+		<b>take_string:</b> this string will be displayed on the button that allows taking the item, default is <i>Take it</i>.<br />
+		<b>leave_string:</b> this string will be displayed on the button that allows refusing the item, default is <i>Leave it</i>.<br />
+		<b>variable:</b> the resulting choice will be stored (as yes/no) in the variable specified here, default is <i>item_picked</i>.<br />
+		<h3>[reverse_value]</h3>
+		<p>Reverses the value of the supplied variable.<br />
+		<b>variable:</b> required. Its content will be reversed.<br />
+		<b>result_variable:</b> The reversed value will be stored here. If not supplied, the reversed value will be stored in the same variable supplied as argument for the <i>variable=</i> key.</p>
+		<h3>[whisper]</h3>
+		<p>This tag shows a message in italic ans small font. It is meant as a replacement for both <i>{WHISPER}</i> and <i>{ASIDE}</i> macros.<br />
+		<b>message:</b> the message to display, use exactly like in the <i>[message]</i> tag.<br />
+		<b>speaker:</b> speaker of the message, if no value is supplied <i>narrator</i> is used by default.<br />
+		<b>image:</b> the image that will be displayed at the side of this message, if no value is supplied <i>wesnoth-icon.png</i> is used by default.<br />
+		<b>caption:</b> the text to display as speaker's name, use like in the <i>[message]</i> tag.<br />
+		<b>duration:</b> the minimum number of frames for the message to be displayed.<br />
+		<b>side_for:</b> a comma-separated list of sides that determines which sides see the message.<br />
+		<b>sound:</b> a sound effect to play as the message is shown. This can take a comma-separated list; a sound from such a list will be randomly chosen to be played.</p>
+	</body>
+</html>

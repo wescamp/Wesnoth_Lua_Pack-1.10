@@ -12,7 +12,7 @@ local debug_utils = {}
 -- variables to be outputted to distinguish their messages
 -- onscreen (boolean, optional): whether the message shall be displayed in a wml [message] dialog too
 -- That [message] dialog can get very slow for large tables such as unit arrays.
-function debug_utils.dbms(lua_var, clear, name, onscreen)
+function debug_utils.dbms(lua_var, clear, name, onscreen, wrap)
 	if type(clear) ~= "boolean" then clear = true end
 	if type(name) ~= "string" then name = "lua_var" end
 	if type(onscreen) ~= "boolean" then onscreen = true end
@@ -154,11 +154,14 @@ function debug_utils.dbms(lua_var, clear, name, onscreen)
 	if wesnoth then wesnoth.message("dbms", result) end; print(result)
 	local continue = true
 	if onscreen and wesnoth then
-		local wlp_utils = wesnoth.require "~add-ons/Wesnoth_Lua_Pack/wlp_utils.lua"
-		local result = wlp_utils.message({ caption = "dbms", message = result })
-		if result == -2 then continue = false end
+		if wrap then wesnoth.wml_actions.message({ speaker = "narrator", image = "wesnoth-icon.png", message = result })
+		else
+			local wlp_utils = wesnoth.require "~add-ons/Wesnoth_Lua_Pack/wlp_utils.lua"
+			local result = wlp_utils.message({ caption = "dbms", message = result })
+			if result == -2 then continue = false end
+		end
 	end
-	if metatable and continue then debug_utils.dbms(metatable, false, string.format("The metatable %s", tostring(metatable)), onscreen) end
+	if metatable and continue then debug_utils.dbms(metatable, false, string.format("The metatable %s", tostring(metatable)), onscreen, wrap) end
 
 end
 
@@ -259,6 +262,22 @@ function debug_utils.remove_inspect()
 	local tag = options[choice]
 	wesnoth.wml_actions[tag] = global_action_handler_storage[tag]
 	global_action_handler_storage[tag] = nil
+end
+
+------------------------------------------------------------------------------------------------------------------------
+
+local function log_function_body(message, logger)
+	assert(type(message) == "string")
+	wesnoth.wml_actions.wml_message({ logger = logger, message = message })
+	if wesnoth.game_config.debug then wesnoth.message(message) end
+end
+
+function debug_utils.dbg(message)
+	log_function_body(message, "debug")
+end
+
+function debug_utils.wrn(message)
+	log_function_body(message, "warning")
 end
 
 ------------------------------------------------------------------------------------------------------------------------

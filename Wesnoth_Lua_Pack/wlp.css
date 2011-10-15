@@ -1,0 +1,39 @@
+body { font-family: arial,verdana,sans-serif;
+       color: black;
+       text-align: justify;
+       font-size: 12pt;
+       background: #DDEEFF;
+     }
+
+h1 { color: red;
+     font-weight: bold;
+     font-size: 36pt;
+     text-align: center;
+     border-width:10px;
+     border-style:ridge;
+   }
+
+h2 { color: green;
+     font-weight: bold;
+     font-size: 20pt;
+     text-align: left;
+   }
+
+h3 { color: black;
+     font-weight: bold;
+     font-size: 16pt;
+     text-align: left;
+   }
+
+u.blue { color: blue; }
+
+pre { background-color: #FFFFDD;
+      border-width: 2px;
+      border-style: dashed;
+      overflow: auto;
+      overflow-Y: hidden;
+      overflow-X: auto;
+      word-wrap: break-word;
+      padding: 5px;
+    }
+

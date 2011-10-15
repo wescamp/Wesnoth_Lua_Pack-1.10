@@ -260,7 +260,7 @@ end
 
 function wml_actions.poison(cfg)
 	for index, unit in ipairs(wesnoth.get_units(cfg)) do
-		if unit.valid and not unit.status.poisoned then
+		if unit.valid and not unit.status.poisoned and not unit.status.not_living then
 			unit.status.poisoned = true
 			if unit.__cfg.gender == "female" then
 				wesnoth.float_label(unit.x, unit.y, string.format("<span color='red'>%s</span>", tostring( _"female^poisoned" ) ) )
@@ -380,84 +380,6 @@ function wml_actions.scatter_units(cfg) -- replacement for SCATTER_UNITS macro
 
 			units = units - 1 -- counter variable
 		until units <= 0 or #locations <= 0
-	end
-end
-
---[[ [find_path]
-A WML interface to the pathfinder, as described by Sapient in FutureWML.
-[traveler]: SUF, only 1st matching unit
-[destination]: SLF, only 1st matching hex
-variable = 'path' as default
-allow_multiple_turns = yes/no, no as default
-ignore_visibility = yes/no, yes as default
-ignore_teleport = yes/no, no as default
-ignore_units = yes/no, no as default ]]
-
-function wml_actions.find_path(cfg)
-	local filter_unit = (helper.get_child(cfg, "traveler")) or helper.wml_error("[find_path] missing required [traveler] tag")
-	local filter_location = (helper.get_child(cfg, "destination")) or helper.wml_error("[find_path] missing required [destination] tag")
-	local variable = cfg.variable or "path"
-	local ignore_units = cfg.ignore_units
-	local ignore_teleport = cfg.ignore_teleport
-	local allow_multiple_turns = cfg.allow_multiple_turns
-	if cfg.ignore_visibility ~= false then local viewing_side = 0 end --default yes
-
-	local unit = wesnoth.get_units(filter_unit)[1] -- only the first unit matching
-	local locations = wesnoth.get_locations(filter_location) -- only the location with the lowest distance and lowest movement cost will match. If there will still be more than 1, only the 1st maching one.
-	if not allow_multiple_turns then local max_cost = unit.moves end --to avoid wrong calculation on already moved units
-	local current_distance, current_cost = math.huge, math.huge
-	local current_location = {}
-
-	local width,heigth,border = wesnoth.get_map_size() -- data for test below
-
-	for index, location in ipairs(locations) do
-		-- we test if location passed to pathfinder is invalid (border); if is, do nothing, do not return and continue the cycle
-		if location[1] == 0 or location[1] == ( width + 1 ) or location[2] == 0 or location[2] == ( heigth + 1 ) then
-		else
-			local distance = helper.distance_between ( unit.x, unit.y, location[1], location[2] )
-			-- if we pass an unreachable locations an high value will be returned
-			local path, cost = wesnoth.find_path( unit, location[1], location[2], { max_cost = max_cost, ignore_units = ignore_units, ignore_teleport = ignore_teleport, viewing_side = viewing_side } )
-
-			if ( distance < current_distance and cost <= current_cost ) or ( cost < current_cost and distance <= current_distance ) then -- to avoid changing the hex with one with less distance and more cost, or vice versa
-				current_distance = distance
-				current_cost = cost
-				current_location = location
-			end
-		end
-	end
-
-	if #current_location == 0 then wesnoth.message( "WML", "No matching location found by [find_path]" ) else
-		local path, cost = wesnoth.find_path( unit, current_location[1], current_location[2], { max_cost = max_cost, ignore_units = ignore_units, ignore_teleport = ignore_teleport, viewing_side = viewing_side } )
-		local turns
-
-		if cost == 0 then -- if location is the same, of course it doesn't cost any MP
-			turns = 0
-		else
-			turns = math.ceil( ( ( cost - unit.moves ) / unit.max_moves ) + 1 )
-		end
-
-		if cost >= 42424242 then -- it's the high value returned for unwalkable or busy terrains
-			wesnoth.set_variable ( string.format("%s", variable), { length = 0 } ) -- set only length, nil all other values
-		return end
-
-		if not allow_multiple_turns and turns > 1 then -- location cannot be reached in one turn
-			wesnoth.set_variable ( string.format("%s", variable), { length = 0 } )
-		return end -- skip the cycles below
-
-		wesnoth.set_variable ( string.format( "%s", variable ), { length = current_distance, from_x = unit.x, from_y = unit.y, to_x = current_location[1], to_y = current_location[2], movement_cost = cost, required_turns = turns } )
-
-		for index, path_loc in ipairs(path) do
-			local sub_path, sub_cost = wesnoth.find_path( unit, path_loc[1], path_loc[2], { max_cost = max_cost, ignore_units = ignore_units, ignore_teleport = ignore_teleport, viewing_side = viewing_side } )
-			local sub_turns
-
-			if sub_cost == 0 then
-				sub_turns = 0
-			else
-				sub_turns = math.ceil( ( ( sub_cost - unit.moves ) / unit.max_moves ) + 1 )
-			end
-
-			wesnoth.set_variable ( string.format( "%s.step[%d]", variable, index - 1 ), { x = path_loc[1], y = path_loc[2], terrain = wesnoth.get_terrain( path_loc[1], path_loc[2] ), movement_cost = sub_cost, required_turns = sub_turns } ) -- this structure takes less space in the inspection window
-		end
 	end
 end
 
@@ -594,7 +516,7 @@ function wml_actions.unknown_message(cfg)
 		image = image .. "~RIGHT()"
 	end
 
-	wml_actions.message { speaker="narrator", message=cfg.message, caption=cfg.caption, image=image }
+	wesnoth.message { speaker = "narrator", message = cfg.message, caption = cfg.caption, image = image, duration = cfg.duration, side_for = cfg.side_for, sound = cfg.sound }
 end
 
 -- [get_movement_type], by silene
@@ -611,5 +533,40 @@ function wml_actions.get_movement_type(cfg)
 	local unit_type = wesnoth.get_unit_type( unit.__cfg.type )
 	local variable = cfg.variable or "movement_type"
 	wesnoth.set_variable( variable, unit_type.__cfg.movement_type )
+end
+
+-- [reverse_value]: reverses the content of a variable. Usage:
+--	[reverse_value]
+--		variable=test
+--		result_variable=test2
+--	[/reverse_value]
+function wml_actions.reverse_value( cfg )
+	local variable = cfg.variable or helper.wml_error( "[reverse_value] missing required variable= attribute" )
+	local result_variable = cfg.result_variable or cfg.variable -- if there is a result_variable= the original variable won't be overwritten
+	local temp_value = wesnoth.get_variable( variable )
+	local type_value = type( temp_value )
+	if type_value == "string" or type_value == "number" then
+		wesnoth.set_variable( result_variable, string.reverse( temp_value ) )
+	elseif type_value == "userdata" then -- handle translatable strings, or at least try to
+		wesnoth.set_variable( result_variable, string.reverse( tostring ( temp_value ) ) )
+	else helper.wml_error( "Invalid value in [reverse_value] tag" )
+	end
+end
+
+-- [whisper]: a replacement for both WHISPER and ASIDE macros
+--	[whisper]
+--		message=_"Message"
+--		caption=_"A unit"
+--		sound=gold.ogg
+--	[/whisper]
+function wml_actions.whisper( cfg )
+	local message = string.format ( "<small><i>%s</i></small>", tostring( cfg.message ) )
+	wml_actions.message { speaker = cfg.speaker or "narrator",
+			      image = cfg.image or "wesnoth-icon.png",
+			      caption = cfg.caption,
+			      message = message,
+			      duration = cfg.duration,
+			      side_for = cfg.side_for,
+			      sound = cfg.sound }
 end
 
