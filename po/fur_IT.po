@@ -2,295 +2,312 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://bugs.wesnoth.org/\n"
-"POT-Creation-Date: 2011-09-05 21:26-0400\n"
+"POT-Creation-Date: 2011-10-19 22:32-0400\n"
 "PO-Revision-Date: 2011-09-05 21:26-0400\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
+"Language: fur_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fur_IT\n"
 
-#: gui-tags.lua:38
+#: Wesnoth_Lua_Pack/gui-tags.lua:38
 msgid "X"
 msgstr ""
 
-#: gui-tags.lua:46
+#: Wesnoth_Lua_Pack/gui-tags.lua:46
 msgid "Y"
 msgstr ""
 
-#: gui-tags.lua:54
+#: Wesnoth_Lua_Pack/gui-tags.lua:54
 msgid "ID"
 msgstr ""
 
-#: gui-tags.lua:62
+#: Wesnoth_Lua_Pack/gui-tags.lua:62
 msgid "Valid"
 msgstr ""
 
-#: gui-tags.lua:70
+#: Wesnoth_Lua_Pack/gui-tags.lua:70
 msgid "Type"
 msgstr ""
 
-#: gui-tags.lua:78 gui-tags.lua:495
+#: Wesnoth_Lua_Pack/gui-tags.lua:78 Wesnoth_Lua_Pack/gui-tags.lua:506
 msgid "Name"
 msgstr ""
 
-#: gui-tags.lua:86
+#: Wesnoth_Lua_Pack/gui-tags.lua:86
 msgid "Can recruit"
 msgstr ""
 
-#: gui-tags.lua:96
+#: Wesnoth_Lua_Pack/gui-tags.lua:96
 msgid "Poisoned"
 msgstr ""
 
-#: gui-tags.lua:100
+#: Wesnoth_Lua_Pack/gui-tags.lua:100
 msgid "Slowed"
 msgstr ""
 
-#: gui-tags.lua:104
+#: Wesnoth_Lua_Pack/gui-tags.lua:104
 msgid "Petrified"
 msgstr ""
 
-#: gui-tags.lua:112
+#: Wesnoth_Lua_Pack/gui-tags.lua:112
 msgid "Uncovered"
 msgstr ""
 
-#: gui-tags.lua:116
+#: Wesnoth_Lua_Pack/gui-tags.lua:116
 msgid "Guardian"
 msgstr ""
 
-#: gui-tags.lua:120
+#: Wesnoth_Lua_Pack/gui-tags.lua:120
 msgid "Unhealable"
 msgstr ""
 
-#: gui-tags.lua:124
+#: Wesnoth_Lua_Pack/gui-tags.lua:124
 msgid "Stunned"
 msgstr ""
 
-#: gui-tags.lua:134
+#: Wesnoth_Lua_Pack/gui-tags.lua:134
 msgid "nw"
 msgstr ""
 
-#: gui-tags.lua:138
+#: Wesnoth_Lua_Pack/gui-tags.lua:138
 msgid "ne"
 msgstr ""
 
-#: gui-tags.lua:142
+#: Wesnoth_Lua_Pack/gui-tags.lua:142
 msgid "n"
 msgstr ""
 
-#: gui-tags.lua:146
+#: Wesnoth_Lua_Pack/gui-tags.lua:146
 msgid "sw"
 msgstr ""
 
-#: gui-tags.lua:150
+#: Wesnoth_Lua_Pack/gui-tags.lua:150
 msgid "se"
 msgstr ""
 
-#: gui-tags.lua:154
+#: Wesnoth_Lua_Pack/gui-tags.lua:154
 msgid "s"
 msgstr ""
 
-#: gui-tags.lua:161
+#: Wesnoth_Lua_Pack/gui-tags.lua:161
 msgid "Resting"
 msgstr ""
 
-#: gui-tags.lua:165 gui-tags.lua:493
+#: Wesnoth_Lua_Pack/gui-tags.lua:165 Wesnoth_Lua_Pack/gui-tags.lua:504
 msgid "Hidden"
 msgstr ""
 
-#: gui-tags.lua:169 gui-tags.lua:481
+#: Wesnoth_Lua_Pack/gui-tags.lua:169 Wesnoth_Lua_Pack/gui-tags.lua:492
 msgid "OK"
 msgstr ""
 
-#: gui-tags.lua:171 gui-tags.lua:483
+#: Wesnoth_Lua_Pack/utils.cfg:105 Wesnoth_Lua_Pack/gui-tags.lua:171
+#: Wesnoth_Lua_Pack/gui-tags.lua:494
 msgid "Cancel"
 msgstr ""
 
-#: gui-tags.lua:179
+#: Wesnoth_Lua_Pack/gui-tags.lua:179
 msgid "Side"
 msgstr ""
 
-#: gui-tags.lua:192
+#: Wesnoth_Lua_Pack/gui-tags.lua:192
 msgid "Hitpoints"
 msgstr ""
 
-#: gui-tags.lua:199
+#: Wesnoth_Lua_Pack/gui-tags.lua:199
 msgid "Kill unit"
 msgstr ""
 
-#: gui-tags.lua:200
+#: Wesnoth_Lua_Pack/gui-tags.lua:200
 msgid "Full health"
 msgstr ""
 
-#: gui-tags.lua:207
+#: Wesnoth_Lua_Pack/gui-tags.lua:207
 msgid "Experience"
 msgstr ""
 
-#: gui-tags.lua:214
+#: Wesnoth_Lua_Pack/gui-tags.lua:214
 msgid "Level up"
 msgstr ""
 
-#: gui-tags.lua:221
+#: Wesnoth_Lua_Pack/gui-tags.lua:221
 msgid "Moves"
 msgstr ""
 
-#: gui-tags.lua:235
+#: Wesnoth_Lua_Pack/gui-tags.lua:235
 msgid "Attacks left"
 msgstr ""
 
-#: gui-tags.lua:249
+#: Wesnoth_Lua_Pack/gui-tags.lua:249
 msgid "Extra recruit"
 msgstr ""
 
-#: gui-tags.lua:259
+#: Wesnoth_Lua_Pack/gui-tags.lua:259
 msgid "Advances to"
 msgstr ""
 
-#: gui-tags.lua:269
+#: Wesnoth_Lua_Pack/gui-tags.lua:269
 msgid "Role"
 msgstr ""
 
-#: gui-tags.lua:279
+#: Wesnoth_Lua_Pack/gui-tags.lua:279
 msgid "Status"
 msgstr ""
 
-#: gui-tags.lua:286
+#: Wesnoth_Lua_Pack/gui-tags.lua:286
 msgid "Facing"
 msgstr ""
 
-#: gui-tags.lua:295
+#: Wesnoth_Lua_Pack/gui-tags.lua:295
 msgid "Misc"
 msgstr ""
 
-#: gui-tags.lua:307
+#: Wesnoth_Lua_Pack/gui-tags.lua:307
 msgid "Quick Debug Menu"
 msgstr ""
 
-#: gui-tags.lua:312 gui-tags.lua:559
+#: Wesnoth_Lua_Pack/gui-tags.lua:312 Wesnoth_Lua_Pack/gui-tags.lua:570
 msgid "Set the desired parameters, then press OK to confirm or Cancel to exit"
 msgstr ""
 
-#: gui-tags.lua:453
+#: Wesnoth_Lua_Pack/utils.cfg:79 Wesnoth_Lua_Pack/gui-tags.lua:464
 msgid "Quick Debug"
 msgstr ""
 
-#: gui-tags.lua:453 gui-tags.lua:636
+#: Wesnoth_Lua_Pack/gui-tags.lua:464 Wesnoth_Lua_Pack/gui-tags.lua:655
 msgid "Error, return value :"
 msgstr ""
 
-#: gui-tags.lua:487
+#: Wesnoth_Lua_Pack/gui-tags.lua:498
 msgid "Total income"
 msgstr ""
 
-#: gui-tags.lua:489
+#: Wesnoth_Lua_Pack/gui-tags.lua:500
 msgid "Fog"
 msgstr ""
 
-#: gui-tags.lua:491
+#: Wesnoth_Lua_Pack/gui-tags.lua:502
 msgid "Shroud"
 msgstr ""
 
-#: gui-tags.lua:497
+#: Wesnoth_Lua_Pack/gui-tags.lua:508
 msgid "Color"
 msgstr ""
 
-#: gui-tags.lua:505
+#: Wesnoth_Lua_Pack/gui-tags.lua:516
 msgid "ai"
 msgstr ""
 
-#: gui-tags.lua:506
+#: Wesnoth_Lua_Pack/gui-tags.lua:517
 msgid "human"
 msgstr ""
 
-#: gui-tags.lua:507
+#: Wesnoth_Lua_Pack/gui-tags.lua:518
 msgid "human_ai"
 msgstr ""
 
-#: gui-tags.lua:508
+#: Wesnoth_Lua_Pack/gui-tags.lua:519
 msgid "network"
 msgstr ""
 
-#: gui-tags.lua:509
+#: Wesnoth_Lua_Pack/gui-tags.lua:520
 msgid "network_ai"
 msgstr ""
 
-#: gui-tags.lua:510
+#: Wesnoth_Lua_Pack/gui-tags.lua:521
 msgid "null"
 msgstr ""
 
-#: gui-tags.lua:515
+#: Wesnoth_Lua_Pack/gui-tags.lua:526
 msgid "Gold"
 msgstr ""
 
-#: gui-tags.lua:521
+#: Wesnoth_Lua_Pack/gui-tags.lua:532
 msgid "Village gold"
 msgstr ""
 
-#: gui-tags.lua:527
+#: Wesnoth_Lua_Pack/gui-tags.lua:538
 msgid "Base income"
 msgstr ""
 
-#: gui-tags.lua:533
+#: Wesnoth_Lua_Pack/gui-tags.lua:544
 msgid "User team name"
 msgstr ""
 
-#: gui-tags.lua:536
+#: Wesnoth_Lua_Pack/gui-tags.lua:547
 msgid "Objectives changed"
 msgstr ""
 
-#: gui-tags.lua:538
+#: Wesnoth_Lua_Pack/gui-tags.lua:549
 msgid "Yes"
 msgstr ""
 
-#: gui-tags.lua:539
+#: Wesnoth_Lua_Pack/gui-tags.lua:550
 msgid "Team name"
 msgstr ""
 
-#: gui-tags.lua:542
+#: Wesnoth_Lua_Pack/gui-tags.lua:553
 msgid "Controller"
 msgstr ""
 
-#: gui-tags.lua:554
+#: Wesnoth_Lua_Pack/gui-tags.lua:565
 msgid "Side Debug Menu"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Black"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Teal"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Brown"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Blue"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Green"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Orange"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Purple"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "White"
 msgstr ""
 
-#: gui-tags.lua:576
+#: Wesnoth_Lua_Pack/gui-tags.lua:587
 msgid "Red"
 msgstr ""
 
-#: gui-tags.lua:636
+#: Wesnoth_Lua_Pack/gui-tags.lua:655
 msgid "Side Debug"
+msgstr ""
+
+#: Wesnoth_Lua_Pack/gui-tags.lua:708
+msgid "Take it"
+msgstr ""
+
+#: Wesnoth_Lua_Pack/gui-tags.lua:709
+msgid "Leave it"
+msgstr ""
+
+#: Wesnoth_Lua_Pack/utils.cfg:64 Wesnoth_Lua_Pack/utils.cfg:91
+msgid "Quick Unit Debug"
+msgstr ""
+
+#: Wesnoth_Lua_Pack/utils.cfg:68 Wesnoth_Lua_Pack/utils.cfg:98
+msgid "Quick Side Debug"
 msgstr ""
