@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: wescamp-i 18n\n"
 "Report-Msgid-Bugs-To: http://bugs.wesnoth.org/\n"
 "POT-Creation-Date: 2011-10-19 22:32-0400\n"
-"PO-Revision-Date: 2011-09-05 21:21-0400\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2012-01-19 15:28+0100\n"
+"Last-Translator: Guigou Guillaume <guillaume.guigou@orange.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -13,302 +13,385 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:38
+#, fuzzy
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:46
+#, fuzzy
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:54
+#, fuzzy
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:62
+#, fuzzy
 msgid "Valid"
-msgstr ""
+msgstr "Valide"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:70
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:78 Wesnoth_Lua_Pack/gui-tags.lua:506
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:86
+#, fuzzy
 msgid "Can recruit"
-msgstr ""
+msgstr "Peuvent recruter"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:96
+#, fuzzy
 msgid "Poisoned"
-msgstr ""
+msgstr "Empoisonné"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:100
+#, fuzzy
 msgid "Slowed"
-msgstr ""
+msgstr "Ralentissement"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:104
+#, fuzzy
 msgid "Petrified"
-msgstr ""
+msgstr "Pétrifié"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:112
+#, fuzzy
 msgid "Uncovered"
-msgstr ""
+msgstr "Découvert"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:116
+#, fuzzy
 msgid "Guardian"
-msgstr ""
+msgstr "Gardien"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:120
+#, fuzzy
 msgid "Unhealable"
-msgstr ""
+msgstr "Insoignable"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:124
+#, fuzzy
 msgid "Stunned"
-msgstr ""
+msgstr "Assommé"
 
+# Nord Ouest
 #: Wesnoth_Lua_Pack/gui-tags.lua:134
+#, fuzzy
 msgid "nw"
-msgstr ""
+msgstr "no"
 
+# Nord Est
 #: Wesnoth_Lua_Pack/gui-tags.lua:138
+#, fuzzy
 msgid "ne"
-msgstr ""
+msgstr "ne"
 
+# Nord
 #: Wesnoth_Lua_Pack/gui-tags.lua:142
+#, fuzzy
 msgid "n"
-msgstr ""
+msgstr "n"
 
+# Sud Ouest
 #: Wesnoth_Lua_Pack/gui-tags.lua:146
+#, fuzzy
 msgid "sw"
-msgstr ""
+msgstr "so"
 
+# Sud Est
 #: Wesnoth_Lua_Pack/gui-tags.lua:150
+#, fuzzy
 msgid "se"
-msgstr ""
+msgstr "se"
 
+# Sud
 #: Wesnoth_Lua_Pack/gui-tags.lua:154
+#, fuzzy
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:161
+#, fuzzy
 msgid "Resting"
-msgstr ""
+msgstr "Repos"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:165 Wesnoth_Lua_Pack/gui-tags.lua:504
+#, fuzzy
 msgid "Hidden"
-msgstr ""
+msgstr "Invisible"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:169 Wesnoth_Lua_Pack/gui-tags.lua:492
+#, fuzzy
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: Wesnoth_Lua_Pack/utils.cfg:105 Wesnoth_Lua_Pack/gui-tags.lua:171
 #: Wesnoth_Lua_Pack/gui-tags.lua:494
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:179
+#, fuzzy
 msgid "Side"
-msgstr ""
+msgstr "Face"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:192
+#, fuzzy
 msgid "Hitpoints"
-msgstr ""
+msgstr "Points de vie"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:199
+#, fuzzy
 msgid "Kill unit"
-msgstr ""
+msgstr "Tuer l'unité"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:200
+#, fuzzy
 msgid "Full health"
-msgstr ""
+msgstr "Santé complète"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:207
+#, fuzzy
 msgid "Experience"
-msgstr ""
+msgstr "Expérience"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:214
+#, fuzzy
 msgid "Level up"
-msgstr ""
+msgstr "Niveau supérieur"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:221
+#, fuzzy
 msgid "Moves"
-msgstr ""
+msgstr "Mouvements"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:235
+#, fuzzy
 msgid "Attacks left"
-msgstr ""
+msgstr "Attaques de gauche"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:249
+#, fuzzy
 msgid "Extra recruit"
-msgstr ""
+msgstr "Recrutement supplémentaire"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:259
+#, fuzzy
 msgid "Advances to"
-msgstr ""
+msgstr "Avances à"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:269
+#, fuzzy
 msgid "Role"
-msgstr ""
+msgstr "Rôle"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:279
+#, fuzzy
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:286
+#, fuzzy
 msgid "Facing"
-msgstr ""
+msgstr "Face"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:295
+#, fuzzy
 msgid "Misc"
-msgstr ""
+msgstr "Divers"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:307
+#, fuzzy
 msgid "Quick Debug Menu"
-msgstr ""
+msgstr "Menu rapide de débogage"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:312 Wesnoth_Lua_Pack/gui-tags.lua:570
+#, fuzzy
 msgid "Set the desired parameters, then press OK to confirm or Cancel to exit"
 msgstr ""
+"Réglez les paramètres souhaités, puis appuyez sur OK pour confirmer ou sur "
+"Annuler pour quitter"
 
 #: Wesnoth_Lua_Pack/utils.cfg:79 Wesnoth_Lua_Pack/gui-tags.lua:464
+#, fuzzy
 msgid "Quick Debug"
-msgstr ""
+msgstr "Débogage rapide"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:464 Wesnoth_Lua_Pack/gui-tags.lua:655
+#, fuzzy
 msgid "Error, return value :"
-msgstr ""
+msgstr "Valeur de retour de l'erreur :"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:498
+#, fuzzy
 msgid "Total income"
-msgstr ""
+msgstr "Total des revenus"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:500
+#, fuzzy
 msgid "Fog"
-msgstr ""
+msgstr "Brouillard"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:502
+#, fuzzy
 msgid "Shroud"
-msgstr ""
+msgstr "Voile"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:508
+#, fuzzy
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:516
+#, fuzzy
 msgid "ai"
-msgstr ""
+msgstr "ia"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:517
+#, fuzzy
 msgid "human"
-msgstr ""
+msgstr "humain"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:518
+#, fuzzy
 msgid "human_ai"
-msgstr ""
+msgstr "humain_ia"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:519
+#, fuzzy
 msgid "network"
-msgstr ""
+msgstr "réseau"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:520
+#, fuzzy
 msgid "network_ai"
-msgstr ""
+msgstr "réseau_ia"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:521
+#, fuzzy
 msgid "null"
-msgstr ""
+msgstr "Invalide"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:526
+#, fuzzy
 msgid "Gold"
-msgstr ""
+msgstr "Or"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:532
+#, fuzzy
 msgid "Village gold"
-msgstr ""
+msgstr "Or du village"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:538
+#, fuzzy
 msgid "Base income"
-msgstr ""
+msgstr "Revenu de base"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:544
+#, fuzzy
 msgid "User team name"
-msgstr ""
+msgstr "Nom de l'équipe utilisateur"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:547
+#, fuzzy
 msgid "Objectives changed"
-msgstr ""
+msgstr "Objectifs changé"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:549
+#, fuzzy
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:550
+#, fuzzy
 msgid "Team name"
-msgstr ""
+msgstr "Nom de l'équipe"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:553
+#, fuzzy
 msgid "Controller"
-msgstr ""
+msgstr "Contrôleur"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:565
+#, fuzzy
 msgid "Side Debug Menu"
-msgstr ""
+msgstr "Menu de débogage latérale"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Teal"
-msgstr ""
+msgstr "Bleu Turquoise"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Brown"
-msgstr ""
+msgstr "Marron"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Green"
-msgstr ""
+msgstr "Vert"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Orange"
-msgstr ""
+msgstr "Orange"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Purple"
-msgstr ""
+msgstr "Violet"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:587
+#, fuzzy
 msgid "Red"
-msgstr ""
+msgstr "Rouge"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:655
+#, fuzzy
 msgid "Side Debug"
-msgstr ""
+msgstr "Debug latérale"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:708
+#, fuzzy
 msgid "Take it"
-msgstr ""
+msgstr "Prenez"
 
 #: Wesnoth_Lua_Pack/gui-tags.lua:709
+#, fuzzy
 msgid "Leave it"
-msgstr ""
+msgstr "Laissez"
 
 #: Wesnoth_Lua_Pack/utils.cfg:64 Wesnoth_Lua_Pack/utils.cfg:91
+#, fuzzy
 msgid "Quick Unit Debug"
-msgstr ""
+msgstr "Debug rapide d'unité"
 
 #: Wesnoth_Lua_Pack/utils.cfg:68 Wesnoth_Lua_Pack/utils.cfg:98
+#, fuzzy
 msgid "Quick Side Debug"
-msgstr ""
+msgstr "Debug rapide latérale"
