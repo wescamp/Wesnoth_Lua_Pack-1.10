@@ -71,8 +71,8 @@ end
 
 function utils.extract_unit(filter)
 	local char = wesnoth.get_units(filter)
- 	local debug_utils = wesnoth.require("~add-ons/Wesnoth_Lua_Pack/debug_utils.lua")
- 	debug_utils.dbms(char, false, string.format("Extraction of units (first character id: %s)", char[1].id), side_num, true)
+	local debug_utils = wesnoth.require("~add-ons/Wesnoth_Lua_Pack/debug_utils.lua")
+	debug_utils.dbms(char, false, string.format("Extraction of units (first character id: %s)", char[1].id), side_num, true)
 end
 
 --like wml_actions.message but without text wrap
@@ -133,6 +133,27 @@ function utils.message(cfg)
 			}--grid
 		}--dialog
 	return wesnoth.synchronize_choice(function() local value = wesnoth.show_dialog(dialog); return { key = value } end).key
+end
+
+--! Displays a WML text input message box with attributes from table @attr
+--! with optional table @options containing optional label, max_length, and text key/value pairs.
+--! @returns the entered text.
+function utils.get_text_input(attr, options)
+	options = options or {}
+	local msg = {}
+	for k,v in pairs(attr) do
+		msg[k] = attr[k]
+	end
+	local ti = {}
+	for k,v in pairs(options) do
+		ti[k] = options[k]
+	end
+	ti["variable"]="LUA_text_input"
+	table.insert(msg, { "text_input", ti })
+	wesnoth.wml_actions.message(msg)
+	local result = wesnoth.get_variable("LUA_text_input")
+	wesnoth.set_variable("LUA_text_input")
+	return result
 end
 
 -- two support functions for handling strings

@@ -1,3 +1,12 @@
+Version 1.5.0:
+   * Now [item_dialog] always requires take_string= and leave_string= keys.
+   * Added utils.get_text_input function, by SigurdFireDragon.
+   * Added Lua remakes of Javascript's standard dialogs: [alert], [confirm] and
+     [prompt], by Elvish_Hunter.
+   * Added ai_helper.lua file, by mattsc.
+   * Added [random_number] and [get_recruit_list], by Elvish_Hunter.
+   * Added support for interval= key to all the [fade_*] tags.
+
 Version 1.4.0:
    * Made it so that [unknown_message] is able to take duration=, side_for=,
       and sound=.

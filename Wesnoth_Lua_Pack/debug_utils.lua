@@ -12,18 +12,18 @@ local debug_utils = {}
 -- variables to be outputted to distinguish their messages
 -- onscreen (boolean, optional): whether the message shall be displayed in a wml [message] dialog too
 -- That [message] dialog can get very slow for large tables such as unit arrays.
-function debug_utils.dbms(lua_var, clear, name, onscreen, wrap)
+function debug_utils.dbms(lua_var, clear, name, onscreen, wrap, only_return)
 	if type(clear) ~= "boolean" then clear = true end
 	if type(name) ~= "string" then name = "lua_var" end
 	if type(onscreen) ~= "boolean" then onscreen = true end
 
 	local function dump_userdata(data)
 		local metatable = getmetatable(data)
-		if metatable == "unit" then return data.__cfg, true end
-		if metatable == "wml object" then return data.__literal, false end
 		if metatable == "side" then return data.__cfg, true end
+		if metatable == "unit" then return data.__cfg, true end
 		local data_to_string = tostring(data)
 		if metatable == "translatable string" then return data_to_string, false end
+		if metatable == "wml object" then return data.__literal, false end
 		return data_to_string, true
 	end
 
@@ -151,9 +151,11 @@ function debug_utils.dbms(lua_var, clear, name, onscreen, wrap)
 	end
 
 	if clear and wesnoth then wesnoth.clear_messages() end
-	if wesnoth then wesnoth.message("dbms", result) end; print(result)
+	if not only_return then
+		if wesnoth then wesnoth.message("dbms", result) end; print(result)
+	end
 	local continue = true
-	if onscreen and wesnoth then
+	if onscreen and wesnoth and not only_return then
 		if wrap then wesnoth.wml_actions.message({ speaker = "narrator", image = "wesnoth-icon.png", message = result })
 		else
 			local wlp_utils = wesnoth.require "~add-ons/Wesnoth_Lua_Pack/wlp_utils.lua"
@@ -161,8 +163,10 @@ function debug_utils.dbms(lua_var, clear, name, onscreen, wrap)
 			if result == -2 then continue = false end
 		end
 	end
-	if metatable and continue then debug_utils.dbms(metatable, false, string.format("The metatable %s", tostring(metatable)), onscreen, wrap) end
-
+	if metatable and continue then
+		result = result .. debug_utils.dbms(metatable, false, string.format("The metatable %s", tostring(metatable)), onscreen, wrap, only_return)
+	end
+	return result
 end
 
 
@@ -217,7 +221,12 @@ function debug_utils.set_inspect()
 	local function show_inspect()
 		local condition_string = tostring((condition_userdata).condition_string)
 		local condition_function_string = string.format("return %s", condition_string)
-		local condition_function, error_message = loadstring(condition_function_string)
+		local condition_function, error_message
+		if wesnoth.compare_versions and wesnoth.compare_versions(string.sub(_VERSION, 5), ">=", "5.2") then
+			condition_function, error_message = load(condition_function_string)
+		else
+			condition_function, error_message = loadstring(condition_function_string)
+		end
 		if not condition_function then error(string.format("error loading the condition: %s", error_message)) end
 		return condition_function()
 	end

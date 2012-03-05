@@ -34,7 +34,7 @@ wesnoth.dofile '~add-ons/Wesnoth_Lua_Pack/gui-tags.lua'
 function wml_actions.store_shroud(cfg)
 	local team_number = cfg.side or helper.wml_error("Missing required side= attribute in [store_shroud]")
 	local variable = cfg.variable or helper.wml_error("Missing required variable= attribute in [store_shroud].")
-	local side = wesnoth.get_side(team_number)
+	local side = wesnoth.sides[team_number]
 	local current_shroud = side.__cfg.shroud_data
 	wesnoth.set_variable(variable, current_shroud)
 end
@@ -82,7 +82,7 @@ function wml_actions.set_shroud(cfg)
 		local locs_x = table.concat( columns, "," )
 		local locs_y = table.concat( rows, "," )
 
-		if not wesnoth.get_side( team_number ).__cfg.shroud then
+		if not wesnoth.sides[team_number].__cfg.shroud then
 			wml_actions.modify_side { side = team_number, shroud = true } -- in case that shroud was removed by modify_side
 		end
 
@@ -290,46 +290,55 @@ local function fade( value, delay ) -- equivalent to FADE_STEP WML macro
 end
 
 function wml_actions.fade_to_black(cfg) -- replaces FADE_TO_BLACK macro
+	local interval = tonumber( cfg.interval or 5 )
+
 	for value = -32, -224, -32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 end
 
 function wml_actions.fade_to_black_hold(cfg) -- replaces FADE_TO_BLACK_HOLD macro
 	local delay = tonumber( cfg.delay ) or helper.wml_error( "Missing delay= in [fade_to_black_hold]" )
+	local interval = tonumber( cfg.interval or 5 )
 
 	for value = -32, -192, -32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 
 	fade( -224, delay )
 end
 
 function wml_actions.fade_in(cfg) -- replaces FADE_IN macro
+	local interval = tonumber( cfg.interval or 5 )
+
 	for value = -224, 0, 32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 end
 
 function wml_actions.fade_to_white(cfg) -- similar to a theoretical FADE_TO_WHITE macro
+	local interval = tonumber( cfg.interval or 5 )
 	for value = 32, 224, 32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 end
 
 function wml_actions.fade_to_white_hold(cfg) -- like a FADE_TO_WHITE_HOLD macro
 	local delay = tonumber( cfg.delay ) or helper.wml_error( "Missing delay= in [fade_to_black_hold]" )
+	local interval = tonumber( cfg.interval or 5 )
 
 	for value = 32, 192, 32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 
 	fade( 224, delay )
 end
 
 function wml_actions.fade_in_from_white(cfg) -- use after [fade_to_white] or [fade_to_white_hold]
+	local interval = tonumber( cfg.interval or 5 )
+
 	for value = 224, 0, -32 do
-		fade( value, 5 )
+		fade( value, interval )
 	end
 end
 
@@ -522,15 +531,15 @@ end
 -- [get_movement_type], by silene
 --[[ Usage:
 [get_movement_type]
-  # a Standard Unit Filter
-  x,y=$x1,$y1
-  # a variable name or "movement_type" if missing
-  variable=variable_name
+# a Standard Unit Filter
+x,y=$x1,$y1
+# a variable name or "movement_type" if missing
+variable=variable_name
 [/get_movement_type]
 Stores the unit's movement type in the given variable. ]]
 function wml_actions.get_movement_type(cfg)
 	local unit = wesnoth.get_units(cfg)[1] or helper.wml_error "[get_movement_type] filter didn't match any unit"
-	local unit_type = wesnoth.get_unit_type( unit.__cfg.type )
+	local unit_type = wesnoth.unit_types[unit.type]
 	local variable = cfg.variable or "movement_type"
 	wesnoth.set_variable( variable, unit_type.__cfg.movement_type )
 end
@@ -562,11 +571,73 @@ end
 function wml_actions.whisper( cfg )
 	local message = string.format ( "<small><i>%s</i></small>", tostring( cfg.message ) )
 	wml_actions.message { speaker = cfg.speaker or "narrator",
-			      image = cfg.image or "wesnoth-icon.png",
-			      caption = cfg.caption,
-			      message = message,
-			      duration = cfg.duration,
-			      side_for = cfg.side_for,
-			      sound = cfg.sound }
+				image = cfg.image or "wesnoth-icon.png",
+				caption = cfg.caption,
+				message = message,
+				duration = cfg.duration,
+				side_for = cfg.side_for,
+				sound = cfg.sound }
 end
 
+--[[function wml_actions.random_seed( cfg )
+	local seed = tonumber( cfg.seed ) or helper.wml_error( "Missing or wrong seed= attribute in [random_seed]" )
+	math.randomseed( seed )
+end]]
+
+function wml_actions.random_number( cfg )
+	local lowest = tonumber( cfg.lowest ) or helper.wml_error( "Missing or wrong lowest= attribute in [random_number]" )
+	local highest = tonumber( cfg.highest ) or helper.wml_error( "Missing or wrong highest= attribute in [random_number]" )
+	local variable = cfg.variable or "random"
+
+	-- does not work in start event
+	local result = wesnoth.synchronize_choice( function()
+    		return { value = math.random( lowest, highest ) }
+	end)
+
+	wesnoth.set_variable( variable, result.value )
+end
+
+function wml_actions.get_recruit_list( cfg )
+	-- support function
+	-- Lua does not have the in operator as Python
+	-- in Python, "in" can be used also to check if a list contains a certain value, not only to iterate
+	local function check( t, v )
+		for i, va in ipairs( t ) do
+			if type( v ) == type( va ) and v == va then
+				return true
+			end
+		end
+		return false
+	end
+
+	local filter_side = helper.get_child( cfg, "filter_side" ) or helper.wml_error( "Missing [filter_side] in [get_recruit_list]" )
+	local filter = helper.get_child( cfg, "filter" )
+	local variable = cfg.variable or "recruit_list"
+
+	for index, side in ipairs( wesnoth.get_sides( filter_side ) ) do
+		local recruit_list = { }
+
+		for recruitable in string.gmatch( side.__cfg.recruit, '[^,]+' ) do
+			table.insert( recruit_list, recruitable )
+		end
+
+		if filter then
+			filter.side = side.side -- to avoid collecting extra_recruit from enemies
+			for index,unit in ipairs( wesnoth.get_units( filter ) ) do
+				if unit.canrecruit and #unit.extra_recruit > 0 then
+					for extra_index, extra_recruitable in ipairs( unit.extra_recruit ) do
+						if not check( recruit_list, extra_recruitable ) then
+							table.insert( recruit_list, extra_recruitable )
+						end
+					end
+				end
+			end
+		end
+
+		wesnoth.set_variable( string.format( "%s[%d]", variable, index - 1 ), { side = side.side,
+											team_name = side.team_name,
+											user_team_name = side.user_team_name,
+											name = side.name,
+											recruit_list = table.concat( recruit_list, "," ) } )
+	end
+end
